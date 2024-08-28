@@ -1,0 +1,50 @@
+---
+import Chip from "./Chip.astro";
+
+interface ImageMetadata {
+  default: string
+}
+
+
+const importAll = async (r: Record<string, () => Promise<{ default: string }>>): Promise<string[]> => {
+  const imports = Object.keys(r).map(key => r[key]().then(mod => mod.default));
+  return await Promise.all(imports);
+};
+
+const images = await importAll(import.meta.glob<{ default: string }>('../content/gallery/*.{jpg,png}'));
+
+var result: any[] = []
+await Promise.all<any>(images).then((value) => {
+  console.log('ada' + value[0].src)
+  result = value
+});
+
+---
+
+<section>
+  <div class="h-auto w-full py-16 text-center">
+    <div class="flex flex-col gap-8 items-start">
+      <div class="flex-1 justify-center">
+        <Chip title="Our Activity" bgColor="" >
+      </div>
+      <div class="flex-1 justify-center">
+        <h1>Event Gallery</h1>
+      </div>
+      <div class="grid grid-cols-3 gap-4 ">
+    {
+      result.map((image, index) => (
+        <div class="group transition-all mb-4">
+          <img
+            src={image.src}
+            height={image.height}
+            width={image.width}
+            alt={`Gallery Image ${index + 1}`}
+            class="rounded-lg transition-all group-hover:shadow-lg group-hover:opacity-90 object-[10%] object-scale-down"
+          />
+        </div>
+      ))
+    }
+      </div>
+  </div>
+  </div>
+</section>

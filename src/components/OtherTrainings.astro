@@ -1,0 +1,51 @@
+---
+import { apiConfig } from "../config/api";
+import Chip from "./Chip.astro";
+import TrainingList from "./TrainingList.astro";
+
+export async function fetchOtherTrainingSuggestions(params : any ) {
+  const res = await fetch(`${apiConfig.baseUrl}/trainings?pagination[page]=1&pagination[pageSize]=10&filters[id][$ne]=${params}&populate[image]=*`,
+    {
+      headers: {
+          "Authorization": `Bearer ${apiConfig.lifetimeToken}`,
+          "Content-Type": "application/json"
+      },
+      method: "GET"
+    }
+  );
+  const training = await res.json();
+  const data = training.data
+
+  return {
+    props: { data },
+  };
+}
+
+function shuffleArray(array: []) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+
+    return array;
+}
+
+var {id} = Astro.params
+const resp = await fetchOtherTrainingSuggestions(id);
+
+const trainingSuggestions = resp.props.data
+var randomizedTrainingSuggestions = shuffleArray(trainingSuggestions)
+console.log(randomizedTrainingSuggestions.length)
+
+---
+<section>
+  <div class="flex flex-col gap-8 h-full py-16 justify-center items-start">
+    <Chip client:load title={"Pelatihan"} fontSize={10}></Chip>
+    <h1 class="font-semibold text-3xl">Pelatihan Lainnya </h1>
+    <div class="whitespace-nowrap overflow-y-auto w-full">
+      <TrainingList predefinedTrainingLists={randomizedTrainingSuggestions}/>
+    </div>
+  </div>
+</section>

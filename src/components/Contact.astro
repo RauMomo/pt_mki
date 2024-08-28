@@ -1,0 +1,38 @@
+---
+import Chip from "./Chip.astro";
+---
+
+<section>
+  <div class="h-auto w-full py-16 px-16 text-center">
+    <div class="flex flex-col gap-8 items-start">
+      <div class="flex-1 justify-center">
+        <Chip fontSize={10} title="Let's Work Together" bgColor="" >
+      </div>
+      <div class="flex-1 justify-center">
+        <h1 class="text-3xl font-semibold">Kontak Kami</h1>
+      </div>
+      <div class="flex flex-row gap-4 bg-contact bg-contain w-full p-8 text-start">
+        <div class="flex-[33%] flex flex-col gap-4">
+          <strong>
+            Kontak :
+          </strong>
+          <p class="leading-7 text-primary underline">
+            0812-1500-2004
+          </p>
+          <strong>
+            Alamat Kantor :
+          </strong>
+          <p class="leading-7">
+            Menara 165 Lt.4
+            <br>
+            <br>
+            Jl. TB Simatupang Kav. 1, Cilandak Timur Jakarta 12560
+          </p>
+          <!-- <Button className="w-auto z-10 text-black" variant="secondary" title="Test">Test</Button> -->
+        </div>
+        <div class="flex-auto">
+          Container 2
+        </div>
+      </div>
+    </div>
+  </div>
