@@ -11,7 +11,6 @@ configDotenv();
 export default defineConfig({
   output: "server",
   trailingSlash: "never",
-  adapter: vercel(),
   integrations: [
     pagefind(),
     tailwind({
