@@ -1,5 +1,11 @@
 ---
+import AboutUs from "../components/AboutUs.astro";
+import Background from "../components/Background.astro";
 import Banner from "../components/Banner.astro";
+import Customers from "../components/Customers.astro";
+import Gallery from "../components/Gallery.astro";
+import Service from "../components/Service.astro";
+import VisionMission from "../components/VisionMission.astro";
 import Layout from "../layouts/Layout.astro";
 
 ---
@@ -7,12 +13,12 @@ import Layout from "../layouts/Layout.astro";
 <Layout title="Welcome to Astro.">
   <main class="flex flex-col">
     <Banner />
-    <!-- <VisionMission />
+    <VisionMission />
     <Background />
     <AboutUs />
-    <Services client:load />
+    <Service />
     <Customers />
-    <Gallery/> -->
+    <Gallery/>
   </main>
 </Layout>
 
