@@ -4,6 +4,7 @@ import { defineConfig } from "astro/config";
 import { configDotenv } from "dotenv";
 
 import react from "@astrojs/react";
+import vercel from "@astrojs/vercel/serverless";
 
 configDotenv();
 
